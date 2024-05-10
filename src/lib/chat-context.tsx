@@ -1,7 +1,7 @@
 'use client';
 
 import axios from 'axios';
-import { FC, createContext, useState } from 'react';
+import { FC, createContext, useEffect, useState } from 'react';
 
 const ChatContext = createContext({});
 
@@ -12,68 +12,90 @@ interface ProviderProps {
 export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 	const [chatHistory, setChatHistory]: any = useState([]);
 	const [show, setShow] = useState(false);
-	const [activeSessionID, setActiveSessionID]:any = useState('');
+	const [activeSession, setActiveSession]: any = useState();
+	const user_id = 'yasharma0701@gmail.com';
+	useEffect(() => {
+		axios
+			.get(`http://127.0.0.1:8080/api/chatHistory/${user_id}`)
+			.then((res) => {
+				setChatHistory(res.data);
+				setActiveSession(res.data[0]);
+				if (res.data.length !== 0) setShow(true);
+			});
+	}, []);
 
-	// add new chat
 	const addNewSession = async () => {
 		setShow(false);
-		const makeDocument = await axios.post("http://127.0.0.1:8080/api/new-session", {token: "yasharma0701@gmail.com"});
+		const timenow = new Date();
+		const makeDocument = await axios.post(
+			'http://127.0.0.1:8080/api/new-session',
+			{ user_id, timenow },
+		);
+
 		setChatHistory((prevChatHistory: any) => {
-			const newChatHistory = [...prevChatHistory];
-            newChatHistory.forEach((session:any) => {
-                session.active = false;
-            });
-			newChatHistory.push({
-				sessionID: makeDocument.data,
-				chatHeading: 'New Chat',
-				chatContent:
-					'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti rem molestiae ut dolorum suscipit ratione magnam blanditiis. Molestiae velit autem nam eveniet eos dolore.',
-				cTime: new Date(),
-				active: true,
-				chats: [],
-			});
-			console.log(newChatHistory);
+			let newChatHistory = [...prevChatHistory];
+			const index = newChatHistory.findIndex(
+				(sess) => sess.sessionID === activeSession.sessionID,
+			);
+			newChatHistory[index] = activeSession;
+			newChatHistory = [
+				...newChatHistory,
+				{
+					_id: { "$oid": makeDocument.data },
+					chatHeading: 'New Chat',
+					chatContent:
+						'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti rem molestiae ut dolorum suscipit ratione magnam blanditiis. Molestiae velit autem nam eveniet eos dolore.',
+					cTime: new Date(),
+					chats: [],
+				},
+			];
 			return newChatHistory;
 		});
-		setActiveSessionID(makeDocument.data);
-	};
 
-	// switch between chat
-	const switchSession = (sessionID: any) => {
-		let size = 0;
-		setChatHistory((prevChatHistory: any) => {
-			const newChatHistory = [...prevChatHistory];
-			newChatHistory.forEach((session) => {
-				session.active = (sessionID == session.sessionID);
-                if(session.active) size = session.chats.length;
-			});
-            console.log(newChatHistory);
-            return newChatHistory;
+		setActiveSession({
+			_id: { "$oid": makeDocument.data },
+			chatHeading: 'New Chat',
+			chatContent:
+				'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti rem molestiae ut dolorum suscipit ratione magnam blanditiis. Molestiae velit autem nam eveniet eos dolore.',
+			cTime: timenow,
+			chats: [],
 		});
-		setActiveSessionID(sessionID);
-		setShow(size !== 0);
 	};
 
-	// update chat
-	const updateChat = (chat: any, sessionID: any) => {
+	const switchSession = (session: any) => {
 		setChatHistory((prevChatHistory: any) => {
 			const newChatHistory = [...prevChatHistory];
-			newChatHistory.forEach((session) => {
-				if (sessionID === session.sessionID) {
-					session.chats.push(chat);
-				}
-			});
-            return newChatHistory;
+			const index = newChatHistory.findIndex(
+				(sess) => sess['_id'] === activeSession['_id'],
+			);
+			newChatHistory[index] = activeSession;
+			return newChatHistory;
+		});
+		setActiveSession(session);
+		setShow(session.chats.length !== 0);
+	};
+
+
+	
+	const updateChat = async (chat: any) => {
+		setActiveSession((prevState: any) => {
+			const newState = { ...prevState };
+			newState.chats = [...newState.chats, chat];
+			return newState;
 		});
 		setShow(true);
-
-
-
 	};
 
 	return (
 		<ChatContext.Provider
-			value={{ chatHistory, activeSessionID, show, addNewSession, switchSession, updateChat }}
+			value={{
+				chatHistory,
+				activeSession,
+				show,
+				addNewSession,
+				switchSession,
+				updateChat,
+			}}
 		>
 			{children}
 		</ChatContext.Provider>

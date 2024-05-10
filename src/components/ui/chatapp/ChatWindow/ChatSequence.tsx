@@ -1,20 +1,18 @@
 'use client';
 
-import { FC } from "react";
+import { FC, useContext } from "react";
 import Chat from "./Chat";
+import ChatContext from "@/lib/chat-context";
 
-interface ChatSequenceProps {
-	chats: any
-}
+const ChatSequence = () => {
+	const { activeSession }:any = useContext(ChatContext);
 
-const ChatSequence:FC<ChatSequenceProps> = ({chats}) => {
-	
 	return (
 		<div
 			className="w-full h-[75vh] flex flex-col items-center overflow-y-scroll pb-32 divide-y-2 divide-gray-500"
 			style={{ scrollbarWidth: 'none' }}
 		>
-			{chats && chats.map((chat:any, index:number) => <Chat key={index} chat={chat}/>)}
+			{activeSession.chats.map((chat:any, index:number) => <Chat key={index} chat={chat}/>)}
 		</div>
 	);
 };

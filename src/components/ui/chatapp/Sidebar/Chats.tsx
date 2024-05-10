@@ -11,7 +11,7 @@ const Chats = () => {
 			className="w-full mt-4 h-[87%] flex flex-col overflow-y-scroll"
 			style={{ scrollbarWidth: 'none' }}
 		>
-			{chatHistory && chatHistory.map((session:any, index:number) => (
+			{chatHistory.map((session:any, index:number) => (
 				<ChatCard key={index} session={session}/>
 			))}
 		</div>

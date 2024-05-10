@@ -8,16 +8,17 @@ interface ChatCardProp {
 }
 
 const ChatCard: FC<ChatCardProp> = ({ session }) => {
-	const { switchSession }: any = useContext(ChatContext);
+	const { switchSession, activeSession }: any = useContext(ChatContext);
 	const [hov, setHov] = useState(false);
+
 	return (
 		<div
 			className={`${
-				session.active || hov ? 'bg-[#1E1F22]' : ' '
+				(session['_id']['$oid']===activeSession['_id']['$oid']) || hov ? 'bg-[#1E1F22]' : ' '
 			} h-28 w-full my-2 px-2 rounded-lg flex cursor-pointer`}
 			onMouseEnter={() => setHov(true)}
 			onMouseLeave={() => setHov(false)}
-			onClick={() => switchSession(session.sessionID)}
+			onClick={() => switchSession(session)}
 		>
 			<div className="h-full mr-2 py-3">
 				<svg

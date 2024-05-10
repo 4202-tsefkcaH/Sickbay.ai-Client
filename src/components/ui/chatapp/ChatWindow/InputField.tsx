@@ -2,15 +2,12 @@
 
 import ChatContext from '@/lib/chat-context';
 import axios from 'axios';
-import { FC, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 
-interface addChatProp {
-	addChat: any;
-}
 
-const InputField:FC<addChatProp> = ({addChat}) => {
+const InputField = () => {
 	const [prompt, setPrompt] = useState('');
-	const {activeSessionID}:any = useContext(ChatContext);
+	const { activeSession, updateChat, chatHistory }:any = useContext(ChatContext);
 
 	const handlePromptChange = (event: any) => {
 		const { value } = event.target;
@@ -21,18 +18,20 @@ const InputField:FC<addChatProp> = ({addChat}) => {
 
 	const makePromptRequest = async () => {
 		const tm = new Date();
+		const sessionID = activeSession['_id']['$oid'];
+		console.log(activeSession['_id']);
 		const response = await axios.post(
 			'http://127.0.0.1:8080/api/query',
-			{ prompt, tm, activeSessionID },
+			{ prompt, tm, sessionID },
 		);
-		setPrompt('');
-		addChat({
+		updateChat({
 			question: prompt,
 			answer: response.data,
 			pTime: tm,
-		})
+		});
+		setPrompt('');
 	};
-
+	
 	return (
 		<div className="w-full h-[10vh] flex justify-center">
 			<form
@@ -77,6 +76,7 @@ const InputField:FC<addChatProp> = ({addChat}) => {
 					placeholder="Ask questions, or type ‘/’ for commands"
 					onChange={handlePromptChange}
 					value={prompt}
+					disabled={chatHistory.length===0}
 				/>
 				<svg
 					width="35"
