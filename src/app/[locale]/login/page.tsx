@@ -42,7 +42,7 @@ export default function Login(){
             const response = await axios.post("/api/signup", sign);
             console.log(response);
             localStorage["token"] = response.data.token;
-            localStorage["email"] = response.data.email;
+            localStorage["id"] = response.data.id;
             router.push("/");
             
         } catch (error:any) {
@@ -61,7 +61,7 @@ export default function Login(){
             console.log("Login success");
             console.log(response);
             localStorage["token"] = response.data.token;
-            localStorage["email"] = response.data.email;
+            localStorage["id"] = response.data.id;
             // cookies().set('token', response.data);
             router.push("/");
         } catch (error : any) {
