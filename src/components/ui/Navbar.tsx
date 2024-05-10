@@ -1,9 +1,16 @@
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.svg';
+import avatar from "@/assets/avatar-male.svg"
 
 export default function Navbar() {
+	const [isUser, setIsUser] = useState<boolean>(false);
+	useEffect(() => {
+		if(localStorage["token"]) setIsUser(true);
+	},[]);
+
 	return (
 		<>
 			<nav className="max-w-screen h-8 inset-x-0 z-50 bg-[#2AA7FF] text-white shadow-sm flex justify-center items-center">
@@ -42,15 +49,19 @@ export default function Navbar() {
 								</Link>
 								<Link
 									className="font-medium flex items-center text-sm transition-colors hover:underline"
-									href="/"
+									href="/contact"
 								>
 									Contact
 								</Link>
 							</nav>
 							<div className="flex items-center gap-4">
-								<Link href="/login">
+								{isUser && <Link href="/history">
+									<Image src={avatar} alt='avatar' className='rounded-full h-10'/>
+									</Link>}
+								{!isUser && <Link href="/login">
 									<Button size="sm" className="bg-[#2AA8FF] text-white">Signup / Login</Button>
-								</Link>
+								</Link>}
+								
 							</div>
 						</div>
 					</div>
