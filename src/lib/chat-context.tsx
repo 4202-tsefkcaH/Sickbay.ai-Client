@@ -13,7 +13,7 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 	const [chatHistory, setChatHistory]: any = useState([]);
 	const [show, setShow] = useState(false);
 	const [activeSession, setActiveSession]: any = useState();
-	const user_id = 'yasharma0701@gmail.com';
+	const user_id = localStorage["id"];
 	useEffect(() => {
 		axios
 			.get(`http://127.0.0.1:8080/api/chatHistory/${user_id}`)
@@ -24,6 +24,7 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 			});
 	}, []);
 
+	// add new chat
 	const addNewSession = async () => {
 		setShow(false);
 		const timenow = new Date();

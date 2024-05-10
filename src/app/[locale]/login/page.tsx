@@ -1,6 +1,7 @@
 "use client"
 import React, {useState} from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -23,6 +24,7 @@ import signup from "../../../assets/sign_up.svg";
 
 
 export default function Login(){
+  const router = useRouter();
     const[sign, setSign] = useState({
         email:"",
         password:"",
@@ -39,7 +41,9 @@ export default function Login(){
             console.log(sign);
             const response = await axios.post("/api/signup", sign);
             console.log(response);
-            // router.push("/dashboard");
+            localStorage["token"] = response.data.token;
+            localStorage["id"] = response.data.id;
+            router.push("/");
             
         } catch (error:any) {
             console.log(error);
@@ -56,9 +60,10 @@ export default function Login(){
             const response = await axios.post("/api/signin", login);
             console.log("Login success");
             console.log(response);
-            localStorage["token"] = response.data;
+            localStorage["token"] = response.data.token;
+            localStorage["id"] = response.data.id;
             // cookies().set('token', response.data);
-            // router.push("/dashboard");
+            router.push("/");
         } catch (error : any) {
             console.log("Login failed "+error.message)
         } finally{ 
