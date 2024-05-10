@@ -1,3 +1,4 @@
+"use client"
 import Navbar from '@/components/ui/Navbar';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -29,7 +30,7 @@ export default function Report() {
 					<Image src={medicine} alt="medicine" width={450} className="p-5" />
 					<div>
 						<h1 className="text-[#44B1FF] text-3xl mb-5 font-bold">
-							How It Helps You
+							Lab Reports
 						</h1>
 						<div className="flex justify-start gap-x-5 mb-5">
 							<div className="bg-[#EFDDDE] rounded-full p-2">
