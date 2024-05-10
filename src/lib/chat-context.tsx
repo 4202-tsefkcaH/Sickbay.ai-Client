@@ -13,7 +13,7 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 	const [chatHistory, setChatHistory]: any = useState([]);
 	const [show, setShow] = useState(false);
 	const [activeSessionID, setActiveSessionID]:any = useState('');
-	const email = localStorage["email"];
+	const id = localStorage["id"];
 
 	// add new chat
 	const addNewSession = async () => {
