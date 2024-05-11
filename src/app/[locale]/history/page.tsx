@@ -19,6 +19,7 @@ const History = () => {
 
     const logOut = () => {
         localStorage.clear();
+        localStorage["log"]="-1";
         router.push("/");
     }
 	return (
