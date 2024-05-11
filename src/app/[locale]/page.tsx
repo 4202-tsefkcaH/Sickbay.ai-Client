@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
+import { Toaster, toast } from "react-hot-toast";
 import {
 	Carousel,
 	CarouselContent,
@@ -30,10 +31,29 @@ import blood from '@/assets/Blood-Sample.svg';
 import check from '@/assets/check.svg';
 import hand from '@/assets/caring_hand.svg';
 import hospital from '@/assets/Hospital.svg';
-import logo from '@/assets/logo.svg';
 
 export default function Home() {
 	const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
+	const checkJustLogin = () => {
+		if(localStorage["log"]=="1"){
+			toast.success("User logged in successfully!", {
+				duration:3000,
+				position: "bottom-right"
+			});
+			localStorage["log"]="0";
+		}
+		if(localStorage["log"]=="-1"){
+			toast.success("User logged out successfully!", {
+				duration: 3000,
+				position: "bottom-right"
+			});
+			localStorage["log"]="0";
+		}
+	}
+	useEffect(() => {
+		checkJustLogin();
+	},[]);
+
 	return (
 		<>
 			<Navbar />
@@ -107,7 +127,7 @@ export default function Home() {
 						</CarouselItem>
 					</CarouselContent>
 				</Carousel>
-				
+				<Toaster position='bottom-right'/>
 				<div className="flex-col mb-10 max-w-screen">
 					<h2 className="text-[#2AA8FF] text-lg flex justify-center">
 						You may be looking for

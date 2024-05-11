@@ -44,6 +44,8 @@ export default function Login(){
             console.log(response);
             localStorage["token"] = response.data.token;
             localStorage["id"] = response.data.id;
+
+            localStorage["log"]="1";
             router.push("/");
             
         } catch (error:any) {
@@ -63,6 +65,7 @@ export default function Login(){
             console.log(response);
             localStorage["token"] = response.data.token;
             localStorage["id"] = response.data.id;
+            localStorage["log"] = "1";
             // cookies().set('token', response.data);
             router.push("/");
         } catch (error : any) {

@@ -13,15 +13,19 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 	const [chatHistory, setChatHistory]: any = useState([]);
 	const [show, setShow] = useState(false);
 	const [activeSession, setActiveSession]: any = useState();
-	const user_id = localStorage.getItem("id");
+	let user_id: any = '';
+	if (typeof window !== 'undefined') {
+		user_id = localStorage.getItem('id');
+	}
 	useEffect(() => {
-		axios
-			.get(`http://127.0.0.1:8080/api/chatHistory/${user_id}`)
-			.then((res) => {
-				setChatHistory(res.data);
-				setActiveSession(res.data[0]);
-				if (res.data.length !== 0) setShow(true);
-			});
+		if (user_id !== '')
+			axios
+				.get(`http://127.0.0.1:8080/api/chatHistory/${user_id}`)
+				.then((res) => {
+					setChatHistory(res.data);
+					setActiveSession(res.data[0]);
+					if (res.data.length !== 0) setShow(true);
+				});
 	}, [user_id]);
 
 	const addNewSession = async () => {
@@ -41,7 +45,7 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 			newChatHistory = [
 				...newChatHistory,
 				{
-					_id: { "$oid": makeDocument.data },
+					_id: { $oid: makeDocument.data },
 					chatHeading: 'New Chat',
 					chatContent:
 						'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti rem molestiae ut dolorum suscipit ratione magnam blanditiis. Molestiae velit autem nam eveniet eos dolore.',
@@ -53,7 +57,7 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 		});
 
 		setActiveSession({
-			_id: { "$oid": makeDocument.data },
+			_id: { $oid: makeDocument.data },
 			chatHeading: 'New Chat',
 			chatContent:
 				'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti rem molestiae ut dolorum suscipit ratione magnam blanditiis. Molestiae velit autem nam eveniet eos dolore.',
