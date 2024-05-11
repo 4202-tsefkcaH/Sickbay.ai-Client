@@ -130,7 +130,15 @@ export default function Home() {
 						</CarouselItem>
 					</CarouselContent>
 				</Carousel>
-				<Toaster position='bottom-right'/>
+				<Toaster toastOptions={{
+    				className: 'text-white bg-[#1A3C80]',
+    				style: {
+      				// border: '1px solid #713200',
+      				// padding: '16px',
+      				background: '#1A3C80',
+					color: "#ffffff"
+    				},
+  				}} position='bottom-right'/>
 				<div className="flex-col mb-10 max-w-screen">
 					<h2 className="text-[#2AA8FF] text-lg flex justify-center">
 						You may be looking for
