@@ -10,10 +10,17 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+  import { useRouter } from "next/navigation";
   import { Button } from "@/components/ui/button";
 
 
 const History = () => {
+  const router = useRouter();
+
+    const logOut = () => {
+        localStorage.clear();
+        router.push("/");
+    }
 	return (
 		<div className="min-h-[100vh] w-[100vw] bg-[#171717]">
 			<Navbar/>
@@ -23,8 +30,9 @@ const History = () => {
                         <h1 className="text-3xl text-white font-semibold m-2"><span className="text-[#44B1FF]">Name:</span> Ratul Saha</h1>
                         <h1 className="text-2xl text-white font-semibold m-2"><span className="text-[#44B1FF]">Email:</span> cs.ratul03@gmail.com</h1>
                     </div>
-                    <div className="flex justify-center items-center">
-                        <Button className="bg-[#2AA7FF] text-white p-2 rounded-lg">change password</Button>
+                    <div className="flex justify-around items-center gap-10">
+                        <Button className="bg-[#2AA7FF] text-white p-4 rounded-lg">change password</Button>
+                        <Button onClick={logOut} className="bg-[#2AA7FF] text-white p-4 rounded-lg">log out</Button>
                     </div>
                     
                 </div>

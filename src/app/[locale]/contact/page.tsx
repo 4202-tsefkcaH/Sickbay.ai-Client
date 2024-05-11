@@ -71,7 +71,7 @@ export default function Contact() {
                                 <Input id="email" placeholder="Enter email" className=" bg-[#171717] rounded-2xl text-white border-none" value={contact.email} onChange={(e) => setContact({...contact, email:e.target.value})} required/>
                             </div>
                             <div className="space-y-1">
-                                <Label htmlFor="subject" className="text-white">Email</Label>
+                                <Label htmlFor="subject" className="text-white">Subject</Label>
                                 <Input id="subject" placeholder="Enter subject" className=" bg-[#171717] rounded-2xl text-white border-none" value={contact.subject} onChange={(e) => setContact({...contact, subject:e.target.value})} required/>
                             </div>
                             <div className="space-y-1">
