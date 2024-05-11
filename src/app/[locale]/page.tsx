@@ -31,18 +31,15 @@ import blood from '@/assets/Blood-Sample.svg';
 import check from '@/assets/check.svg';
 import hand from '@/assets/caring_hand.svg';
 import hospital from '@/assets/Hospital.svg';
-import logo from '@/assets/logo.svg';
 
 export default function Home() {
 	const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
 	const checkJustLogin = () => {
-		console.log("outtttt");
 		if(localStorage["log"]=="1"){
 			toast.success("User logged in successfully!", {
 				duration:3000,
 				position: "bottom-right"
 			});
-			// console.log("heeeeeeeeeeeeeelo");
 			localStorage["log"]="0";
 		}
 		if(localStorage["log"]=="-1"){
@@ -50,13 +47,13 @@ export default function Home() {
 				duration: 3000,
 				position: "bottom-right"
 			});
-
 			localStorage["log"]="0";
 		}
 	}
 	useEffect(() => {
 		checkJustLogin();
-	},[])
+	},[]);
+
 	return (
 		<>
 			<Navbar />

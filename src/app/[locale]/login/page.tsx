@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import React, {useState} from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -40,12 +41,11 @@ export default function Login(){
             // setLoading(true);
             console.log(sign);
             const response = await axios.post("http://localhost:4000/api/signup", sign);
-            // console.log(response);
+            console.log(response);
             localStorage["token"] = response.data.token;
             localStorage["id"] = response.data.id;
 
             localStorage["log"]="1";
-            console.log("helllllllllllo");
             router.push("/");
             
         } catch (error:any) {
