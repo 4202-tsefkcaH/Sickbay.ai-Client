@@ -113,22 +113,22 @@ export default function Home() {
 						You may be looking for
 					</h2>
 					<div className="flex justify-around items-center flex-wrap my-10 gap-x-10">
-						<Card className="bg-[#222222] border-none">
+						<Card className="bg-[#222222] border-none px-5">
 							<CardHeader className="px-10">
 								<Image src={doc} alt="doctor" width={80} />
-								<CardTitle className="text-[#2AA7FF] pt-4">Doctor</CardTitle>
+								<CardTitle className="text-[#2AA7FF] pt-4 text-center">Doctor</CardTitle>
 							</CardHeader>
 						</Card>
-						<Card className="bg-[#222222] border-none flex flex-col justify-center items-center">
-							<CardHeader className="px-10">
-								<Image src={lab} alt="lab" width={80} />
-								<CardTitle className="text-[#2AA7FF] pt-4">Labs</CardTitle>
+						<Card className="bg-[#222222] border-none flex px-5 flex-col justify-center items-center">
+							<CardHeader className="px-10 flex justify-center">
+								<Image src={lab} alt="lab" width={80} className='' />
+								<CardTitle className="text-[#2AA7FF] pt-4 text-center">Labs</CardTitle>
 							</CardHeader>
 						</Card>
-						<Card className="bg-[#222222] border-none">
+						<Card className="bg-[#222222] border-none flex justify-center">
 							<CardHeader className="px-10">
-								<Image src={ambulance} alt="ambulance" width={80} />
-								<CardTitle className="text-[#2AA7FF] pt-4">Ambulance</CardTitle>
+								<Image src={ambulance} alt="ambulance" width={80} className='ml-5' />
+								<CardTitle className="text-[#2AA7FF] pt-4 text-center">Ambulance</CardTitle>
 							</CardHeader>
 						</Card>
 					</div>
@@ -150,7 +150,7 @@ export default function Home() {
 								</div>
 							</CardHeader>
 							<CardContent>
-								<p className="text-sm text-[#44B1FF]">01</p>
+								<p className="text-sm  text-[#44B1FF]">01</p>
 								<p className="text-[#44B1FF] text-lg font-semibold">
 									Primary Care
 								</p>
@@ -163,8 +163,8 @@ export default function Home() {
 								</div>
 							</CardHeader>
 							<CardContent>
-								<p className="text-sm text-[#44B1FF]">02</p>
-								<p className="text-[#44B1FF] text-lg font-semibold">
+								<p className="text-sm ml-3 text-[#44B1FF]">02</p>
+								<p className="text-[#44B1FF] px-3 text-lg font-semibold">
 									Blood Test
 								</p>
 							</CardContent>
@@ -181,8 +181,8 @@ export default function Home() {
 								</div>
 							</CardHeader>
 							<CardContent>
-								<p className="text-sm text-[#44B1FF]">01</p>
-								<p className="text-[#44B1FF] text-lg font-semibold">
+								<p className="text-sm ml-1 text-[#44B1FF]">01</p>
+								<p className="text-[#44B1FF] px-1 text-lg font-semibold">
 									Primary Care
 								</p>
 							</CardContent>

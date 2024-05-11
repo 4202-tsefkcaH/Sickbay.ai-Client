@@ -18,7 +18,7 @@ const FileUploader = () => {
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append('file', file);
-		const res = await axios.post('/api/upload', formData);
+		const res = await axios.post('http://localhost:4000/api/upload', formData);
 		setUploaded(res.data);
 	}
 	

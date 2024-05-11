@@ -22,9 +22,8 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 				setActiveSession(res.data[0]);
 				if (res.data.length !== 0) setShow(true);
 			});
-	}, []);
+	}, [user_id]);
 
-	// add new chat
 	const addNewSession = async () => {
 		setShow(false);
 		const timenow = new Date();
@@ -36,7 +35,7 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 		setChatHistory((prevChatHistory: any) => {
 			let newChatHistory = [...prevChatHistory];
 			const index = newChatHistory.findIndex(
-				(sess) => sess.sessionID === activeSession.sessionID,
+				(sess) => sess['_id'] === activeSession['_id'],
 			);
 			newChatHistory[index] = activeSession;
 			newChatHistory = [
@@ -76,8 +75,6 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 		setShow(session.chats.length !== 0);
 	};
 
-
-	
 	const updateChat = async (chat: any) => {
 		setActiveSession((prevState: any) => {
 			const newState = { ...prevState };
