@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import React, {useState} from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -39,7 +40,7 @@ export default function Login(){
         try {
             // setLoading(true);
             console.log(sign);
-            const response = await axios.post("/api/signup", sign);
+            const response = await axios.post("http://localhost:4000/api/signup", sign);
             console.log(response);
             localStorage["token"] = response.data.token;
             localStorage["id"] = response.data.id;
@@ -57,7 +58,7 @@ export default function Login(){
         try {
             // setLoading(true);
             console.log(login);
-            const response = await axios.post("/api/signin", login);
+            const response = await axios.post("http://localhost:4000/api/signin", login);
             console.log("Login success");
             console.log(response);
             localStorage["token"] = response.data.token;

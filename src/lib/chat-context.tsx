@@ -13,7 +13,7 @@ export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
 	const [chatHistory, setChatHistory]: any = useState([]);
 	const [show, setShow] = useState(false);
 	const [activeSession, setActiveSession]: any = useState();
-	const user_id = localStorage["id"];
+	const user_id = localStorage.getItem("id");
 	useEffect(() => {
 		axios
 			.get(`http://127.0.0.1:8080/api/chatHistory/${user_id}`)

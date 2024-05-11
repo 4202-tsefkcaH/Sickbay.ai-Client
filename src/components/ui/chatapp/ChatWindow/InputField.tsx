@@ -3,12 +3,14 @@
 import ChatContext from '@/lib/chat-context';
 import axios from 'axios';
 import { useContext, useState } from 'react';
+import PromptLoad from '@/assets/chatload.gif';
+import Image from 'next/image';
 
 
 const InputField = () => {
 	const [prompt, setPrompt] = useState('');
 	const { activeSession, updateChat, chatHistory }:any = useContext(ChatContext);
-
+	const [loading, setLoading]:any = useState(false);
 	const handlePromptChange = (event: any) => {
 		const { value } = event.target;
 		setPrompt((prevPrompt: any) => {
@@ -20,6 +22,7 @@ const InputField = () => {
 		const tm = new Date();
 		const sessionID = activeSession['_id']['$oid'];
 		console.log(activeSession['_id']);
+		setLoading(true);
 		const response = await axios.post(
 			'http://127.0.0.1:8080/api/query',
 			{ prompt, tm, sessionID },
@@ -29,6 +32,7 @@ const InputField = () => {
 			answer: response.data,
 			pTime: tm,
 		});
+		setLoading(false);
 		setPrompt('');
 	};
 	
@@ -41,7 +45,7 @@ const InputField = () => {
 					makePromptRequest();
 				}}
 			>
-				<svg
+				{ !loading && <svg
 					width="38"
 					height="38"
 					viewBox="0 0 38 38"
@@ -69,7 +73,8 @@ const InputField = () => {
 						d="M15.4744 16.0527L15.9877 15.5394C16.2599 15.2672 16.6291 15.1143 17.0141 15.1143C17.3991 15.1143 17.7683 15.2672 18.0406 15.5394L19.5802 17.0791L17.0141 19.6452L15.4744 18.1055C15.2022 17.8333 15.0493 17.4641 15.0493 17.0791C15.0493 16.6941 15.2022 16.3249 15.4744 16.0527Z"
 						fill="#EEEEEE"
 					/>
-				</svg>
+				</svg> }
+				{ loading && <Image src={PromptLoad} alt='loading' className='mx-4 w-10 rounded-full'/>}
 				<input
 					type="text"
 					className="bg-transparent outline-none flex-grow text-[#EEEEEE]"

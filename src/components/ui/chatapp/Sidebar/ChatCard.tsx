@@ -15,7 +15,7 @@ const ChatCard: FC<ChatCardProp> = ({ session }) => {
 		<div
 			className={`${
 				(session['_id']['$oid']===activeSession['_id']['$oid']) || hov ? 'bg-[#1E1F22]' : ' '
-			} h-28 w-full my-2 px-2 rounded-lg flex cursor-pointer`}
+			} h-[16vh] w-full my-[10px] px-2 rounded-lg flex cursor-pointer`}
 			onMouseEnter={() => setHov(true)}
 			onMouseLeave={() => setHov(false)}
 			onClick={() => switchSession(session)}

@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, useContext } from "react";
+import { useContext } from "react";
 import Chat from "./Chat";
 import ChatContext from "@/lib/chat-context";
 

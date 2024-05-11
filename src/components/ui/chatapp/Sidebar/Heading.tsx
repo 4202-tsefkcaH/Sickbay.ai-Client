@@ -10,7 +10,7 @@ const Heading = () => {
 	const router = useRouter();
 
 	return (
-		<div className="h-[7%] my-2 w-full flex justify-between items-center">
+		<div className="h-[7vh] my-2 w-full flex justify-between items-center">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
