@@ -12,6 +12,8 @@ import {
   } from "@/components/ui/table"
   import { useRouter } from "next/navigation";
   import { Button } from "@/components/ui/button";
+  import axios from "axios";
+import { useEffect } from "react";
 
 
 const History = () => {
@@ -22,6 +24,16 @@ const History = () => {
         localStorage["log"]="-1";
         router.push("/");
     }
+
+    const getUser = async () => {
+      const id = localStorage["id"];
+      const response:any = await axios.post("http://localhost:4000/api/getUser", {id});
+      console.log(response);
+    }
+
+    useEffect(()=>{
+      getUser();
+    },[])
 	return (
 		<div className="min-h-[100vh] w-[100vw] bg-[#171717]">
 			<Navbar/>
