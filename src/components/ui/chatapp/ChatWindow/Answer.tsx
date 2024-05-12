@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import logo from "@/assets/logo-short.svg"
+import logo from "@/assets/1.png"
 import Image from 'next/image';
 
 interface AnswerProps {
@@ -10,10 +10,10 @@ const Answer: FC<AnswerProps> = ({ ans }) => {
 	return (
 		<div className="w-full my-4 flex flex-col">
 			<div className="flex items-center">
-				<span className="flex justify-center items-center rounded-xl translate-y-4">
-					<Image src={logo} alt="logo"/>
+				<span className="flex bg-[#636363] justify-center items-center rounded-xl translate-y-4">
+					<Image src={logo} alt="logo" className='w-12'/>
 				</span>
-				<span className="ml-4 text-white text-md font-semibold translate-y-2">
+				<span className="ml-2 text-white text-md font-semibold translate-y-2">
 					Response
 				</span>
 			</div>
