@@ -47,7 +47,7 @@ const History = () => {
                         {/* <Button className="bg-[#2AA7FF] text-white p-4 rounded-lg">change password</Button> */}
                         <Button onClick={logOut} className="bg-[#2AA7FF] text-white p-4 rounded-lg">log out</Button>
                     </div>
-                    
+                    q
                 </div>
                 <div className="m-10 p-10 bg-[#222222] rounded-2xl">
                 <Table>

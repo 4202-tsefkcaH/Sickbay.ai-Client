@@ -83,7 +83,7 @@ export default function Report() {
 						<h2 className="text-[#D9D9D9] text-sm">
 							Please attach a lab report to proceed
 						</h2>
-						<FileUploader />
+						{/* <FileUploader /> */}
 					</div>
 					<div className="bg-[#222222] p-10 rounded-md w-[40vw] h-full flex flex-col">
 						<h1 className="text-[#2AA8FF] text-lg font-semibold">

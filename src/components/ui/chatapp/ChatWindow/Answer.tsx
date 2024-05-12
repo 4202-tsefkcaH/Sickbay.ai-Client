@@ -51,9 +51,9 @@ const Answer: FC<AnswerProps> = ({ ans }) => {
 				</span>
 			</div>
 			<div className="bg-[#28303F] w-full px-14 py-5 text-[#FFFFFF] rounded-3xl">
-				{ans.split('\n').map((line: any, index: number) => (
-					<div key={index} className='my-2'>{line}</div>
-				))}
+				{/* {ans.split('\n').map((line: any, index: number) => ( */}
+					<div  className='my-2'>{ans}</div>
+				{/* ))} */}
 			</div>
 		</div>
 	);
