@@ -60,7 +60,7 @@ export default function Login(){
         try {
             // setLoading(true);
             console.log(login);
-            const response = await axios.post("http://localhost:4000/api/signin", login);
+            const response = await axios.post("https://sickbay-ai-server.onrender.com/api/signin", login);
             console.log("Login success");
             console.log(response);
             localStorage["token"] = response.data.token;
