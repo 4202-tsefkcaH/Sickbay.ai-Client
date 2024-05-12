@@ -32,7 +32,7 @@ const History = () => {
                         <h1 className="text-2xl text-white font-semibold m-2"><span className="text-[#44B1FF]">Email:</span> cs.ratul03@gmail.com</h1>
                     </div>
                     <div className="flex justify-around items-center gap-10">
-                        <Button className="bg-[#2AA7FF] text-white p-4 rounded-lg">change password</Button>
+                        {/* <Button className="bg-[#2AA7FF] text-white p-4 rounded-lg">change password</Button> */}
                         <Button onClick={logOut} className="bg-[#2AA7FF] text-white p-4 rounded-lg">log out</Button>
                     </div>
                     

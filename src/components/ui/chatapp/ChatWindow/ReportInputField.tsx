@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 const InputField = () => {
 	const [prompt, setPrompt] = useState('');
 	const [loading, setLoading]:any = useState(false);
-	const { setChatBot, setShow }:any = useContext(ChatContext);
+	const { setReportBot, uploaded }:any = useContext(ChatContext);
 	const router = useRouter();
 
 	const handlePromptChange = (event: any) => {
@@ -29,17 +29,16 @@ const InputField = () => {
 			return;
 		};
 		const response = await axios.post(
-			'http://127.0.0.1:8080/api/query',
-			{ prompt, user_id },
+			'http://127.0.0.1:8080/api/llm',
+			{ prompt, user_id, text: uploaded },
 		);
-		setChatBot((prevChats:any) => {
+		setReportBot((prevChats:any) => {
 			const newChats = [...prevChats, {
 				question: prompt,
 				answer: response.data,
 			}];
 			return newChats;
 		});
-		setShow(true);
 		setLoading(false);
 		setPrompt('');
 	};

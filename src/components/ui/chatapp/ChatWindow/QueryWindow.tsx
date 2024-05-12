@@ -1,16 +1,16 @@
 'use client';
 
 import { useContext } from 'react';
-import ChatSequence from './ChatSequence';
-import InputField from './InputField';
+import ReportSequence from './ReportSequence';
+import InputField from './ReportInputField';
 import ChatContext from '@/lib/chat-context';
 
-const PromptWindow = () => {
-	const { show }:any = useContext(ChatContext);
+const QueryWindow = () => {
+	const { reportBot }:any = useContext(ChatContext);
 
 	return (
 		<div className="bg-[#3F424A] w-full h-[90vh] rounded-t-lg relative">
-			{!show && <div className="w-full h-[75vh] flex flex-col items-center justify-center">
+			{reportBot.length===0 && <div className="w-full h-[75vh] flex flex-col items-center justify-center">
 				<svg
 					fill="#292929"
 					height="100px"
@@ -43,10 +43,10 @@ const PromptWindow = () => {
 					Start by selecting a feature
 				</h1>
 			</div>}
-			{show && <ChatSequence />}
+			{reportBot.length!==0 && <ReportSequence />}
 			<InputField />
 		</div>
 	);
 };
 
-export default PromptWindow;
+export default QueryWindow;

@@ -10,93 +10,25 @@ interface ProviderProps {
 }
 
 export const ChatContextProvider: FC<ProviderProps> = ({ children }) => {
-	const [chatHistory, setChatHistory]: any = useState([]);
-	const [show, setShow] = useState(false);
-	const [activeSession, setActiveSession]: any = useState();
-	let user_id: any = '';
-	if (typeof window !== 'undefined') {
-		user_id = localStorage.getItem('id');
-	}
-	useEffect(() => {
-		if (user_id !== '')
-			axios
-				.get(`http://127.0.0.1:8080/api/chatHistory/${user_id}`)
-				.then((res) => {
-					setChatHistory(res.data);
-					setActiveSession(res.data[0]);
-					if (res.data.length !== 0) setShow(true);
-				});
-	}, [user_id]);
-
-	const addNewSession = async () => {
-		setShow(false);
-		const timenow = new Date();
-		const makeDocument = await axios.post(
-			'http://127.0.0.1:8080/api/new-session',
-			{ user_id, timenow },
-		);
-
-		setChatHistory((prevChatHistory: any) => {
-			let newChatHistory = [...prevChatHistory];
-			const index = newChatHistory.findIndex(
-				(sess) => sess['_id'] === activeSession['_id'],
-			);
-			newChatHistory[index] = activeSession;
-			newChatHistory = [
-				...newChatHistory,
-				{
-					_id: { $oid: makeDocument.data },
-					chatHeading: 'New Chat',
-					chatContent:
-						'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti rem molestiae ut dolorum suscipit ratione magnam blanditiis. Molestiae velit autem nam eveniet eos dolore.',
-					cTime: new Date(),
-					chats: [],
-				},
-			];
-			return newChatHistory;
-		});
-
-		setActiveSession({
-			_id: { $oid: makeDocument.data },
-			chatHeading: 'New Chat',
-			chatContent:
-				'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti rem molestiae ut dolorum suscipit ratione magnam blanditiis. Molestiae velit autem nam eveniet eos dolore.',
-			cTime: timenow,
-			chats: [],
-		});
-	};
-
-	const switchSession = (session: any) => {
-		setChatHistory((prevChatHistory: any) => {
-			const newChatHistory = [...prevChatHistory];
-			const index = newChatHistory.findIndex(
-				(sess) => sess['_id'] === activeSession['_id'],
-			);
-			newChatHistory[index] = activeSession;
-			return newChatHistory;
-		});
-		setActiveSession(session);
-		setShow(session.chats.length !== 0);
-	};
-
-	const updateChat = async (chat: any) => {
-		setActiveSession((prevState: any) => {
-			const newState = { ...prevState };
-			newState.chats = [...newState.chats, chat];
-			return newState;
-		});
-		setShow(true);
-	};
+	const [feature, setFeature] = useState<number>(0);
+	const [show, setShow] = useState<boolean>(false);
+	const [uploaded, setUploaded] = useState<any>({});
+	const [chatBot, setChatBot]:any = useState([]);
+	const [reportBot, setReportBot]:any = useState([]);
 
 	return (
 		<ChatContext.Provider
 			value={{
-				chatHistory,
-				activeSession,
+				feature,
+				setFeature,
 				show,
-				addNewSession,
-				switchSession,
-				updateChat,
+				setShow,
+				uploaded,
+				setUploaded,
+				chatBot,
+				setChatBot,
+				reportBot,
+				setReportBot
 			}}
 		>
 			{children}

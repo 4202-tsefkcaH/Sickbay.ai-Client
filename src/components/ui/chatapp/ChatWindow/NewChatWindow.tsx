@@ -1,6 +1,6 @@
 const NewChatWindow = () => {
 	return (
-		<div className="w-full h-[75vh] flex flex-col items-center justify-center">
+		<div className="w-full h-full flex flex-col items-center justify-center">
 			<svg
 				fill="#292929"
 				height="100px"
@@ -26,7 +26,8 @@ const NewChatWindow = () => {
 					</g>
 				</g>
 			</svg>
-            <h1 className="mt-10 text-2xl text-white font-bold">How can I help you today?</h1>
+            <h1 className="mt-10 text-2xl text-white font-bold">How can we help you today?</h1>
+            <h1 className="mt-4 text-1xl text-white font-bold">Start by selecting a feature</h1>
 		</div>
 	);
 };
